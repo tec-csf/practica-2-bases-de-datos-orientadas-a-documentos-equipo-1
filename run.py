@@ -29,9 +29,12 @@ def main():
         return createDog(cform)
 
     # read all data
-    docs = db.Dogs.find().limit(10)
+    #dogs = db.Dogs.find().limit(10)
+    pipeline = [{"$group":{"_id":"$breed", "total":{"$sum":1}, "male":{"$sum":{"$cond":[{"$eq":["male", "$gender"]}, 1, 0]}}, "female":{"$sum":{"$cond":[{"$eq":["female", "$gender"]}, 1, 0]}}}}]
+    cursor = db.Dogs.aggregate(pipeline)
+    dogs = list(cursor)
     data = []
-    for i in docs:
+    for i in dogs:
         data.append(i)
 
     return render_template('home.html', cform = cform, \

@@ -35,13 +35,12 @@
     </div>
     <br>
     <br>
-    <b>Active Dogs List:</b><br><br>
+    <b>Registered Dog Breeds</b><br><br>
     {% for i in data %}
-        ID = {{ i["_id"] }} <br>
-        Fur Color = {{ i["furColor"] }}<br>
-        Name = {{ i["name"] }} <br>
-        Gender = {{ i["gender"] }}<br>
-        Breed = {{ i["breed"] }} <br><br>
+        Breed = {{ i["_id"] }} <br>
+        Total Registered Dogs = {{ i["total"] }}<br>
+        Male Dogs = {{ i["male"] }} <br>
+        Female Dogs = {{ i["female"] }}<br><br>
     {% endfor %}
   </body>
 </html>

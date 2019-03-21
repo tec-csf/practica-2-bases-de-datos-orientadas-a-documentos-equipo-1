@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Lost Dogs Portal</title>
+    <style>
+        .newspaper {
+            -webkit-column-count: 3; /* Chrome, Safari, Opera */
+            -moz-column-count: 3; /* Firefox */
+            column-count: 3;
+        }
+        .head {
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+        <h1>LOST DOGS</h1>
+    </div>
+    <div>
+        <form method="POST">
+            {{ cform.hidden_tag() }}
+            <fieldset>
+                <legend>Create Dog</legend>
+                {{ cform.name.label }}<br>
+                {{ cform.name }}<br>
+                {{ cform.fur_color.label }}<br>
+                {{ cform.fur_color }}<br>
+                {{ cform.breed.label }}<br>
+                {{ cform.breed }}<br>
+                {{ cform.gender.label }}<br>
+                {{ cform.gender }}<br><br>
+                {{ cform.create }}
+            </fieldset>
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Active Dogs List:</b><br><br>
+    {% for i in data %}
+        ID = {{ i["_id"] }} <br>
+        Fur Color = {{ i["furColor"] }}<br>
+        Name = {{ i["name"] }} <br>
+        Gender = {{ i["gender"] }}<br>
+        Breed = {{ i["breed"] }} <br><br>
+    {% endfor %}
+  </body>
+</html>

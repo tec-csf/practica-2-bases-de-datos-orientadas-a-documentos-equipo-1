@@ -1,7 +1,9 @@
 <html>
   <head>
     <title>Lost Dogs Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+        
         .newspaper {
             -webkit-column-count: 3; /* Chrome, Safari, Opera */
             -moz-column-count: 3; /* Firefox */
@@ -13,34 +15,68 @@
     </style>
   </head>
   <body>
-    <div class="head">
-        <h1>LOST DOGS</h1>
+    <div class="container">
+        <div class="head">
+            <h1>LOST DOGS</h1>
+        </div>
+        <div>
+            <form method="POST">
+                {{ cform.hidden_tag() }}
+                <fieldset>
+                    <legend>Create Dog</legend>
+                    {{ cform.name.label }}<br>
+                    {{ cform.name }}<br>
+                    {{ cform.fur_color.label }}<br>
+                    {{ cform.fur_color }}<br>
+                    {{ cform.breed.label }}<br>
+                    {{ cform.breed }}<br>
+                    {{ cform.gender.label }}<br>
+                    {{ cform.gender }}<br><br>
+                    {{ cform.create }}
+                </fieldset>
+            </form>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col">
+                <b>Registered Dog Breeds</b><br><br>
+                {% for i in data %}
+                    Breed = {{ i["_id"] }} <br>
+                    Total Registered Dogs = {{ i["total"] }}<br>
+                    Male Dogs = {{ i["male"] }} <br>
+                    Female Dogs = {{ i["female"] }}<br><br>
+                {% endfor %}
+                <br>
+            </div>
+            <div class="col">
+                <b>Dog's Owner Information (Top 20)</b><br><br>
+                {% for i in data1 %}
+                    Owner = {{ i["name"] }} <br>
+                    Dog Gender = {{ i["gender"] }}<br>
+                    Dog Breed = {{ i["breed"] }} <br><br>
+                {% endfor %}
+            </div>
+            <div class="col">
+                    <b>Lost Dog Match with Registered Dogs (Top 20)</b><br><br>
+                    {% for i in data2 %}
+                        Lost Dog Id = {{ i["lostDogID"] }} <br>
+                        Dog's Fur Color = {{ i["furColor"] }}<br>
+                        Dog's Gender = {{ i["gender"] }} <br>
+                        Dog's Breed = {{ i["breed"] }} <br>
+                        Dog's Found Date = {{ i["dateFound"] }} <br>
+                        {% for j in i["possibleMatch"] %}
+                            Breed = {{ j["_id"] }} <br>
+                            Total Registered Dogs = {{ j["total"] }}<br>
+                            Male Dogs = {{ j["male"] }} <br>
+                            Female Dogs = {{ j["female"] }}<br><br>
+                        {% endfor %}<br>
+                    {% endfor %}
+                </div>
+          </div>
     </div>
-    <div>
-        <form method="POST">
-            {{ cform.hidden_tag() }}
-            <fieldset>
-                <legend>Create Dog</legend>
-                {{ cform.name.label }}<br>
-                {{ cform.name }}<br>
-                {{ cform.fur_color.label }}<br>
-                {{ cform.fur_color }}<br>
-                {{ cform.breed.label }}<br>
-                {{ cform.breed }}<br>
-                {{ cform.gender.label }}<br>
-                {{ cform.gender }}<br><br>
-                {{ cform.create }}
-            </fieldset>
-        </form>
-    </div>
+
     <br>
-    <br>
-    <b>Registered Dog Breeds</b><br><br>
-    {% for i in data %}
-        Breed = {{ i["_id"] }} <br>
-        Total Registered Dogs = {{ i["total"] }}<br>
-        Male Dogs = {{ i["male"] }} <br>
-        Female Dogs = {{ i["female"] }}<br><br>
-    {% endfor %}
+    
   </body>
 </html>
